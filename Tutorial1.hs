@@ -72,4 +72,32 @@ tl :: [a] -> [a]
 tl [] = error "empty list"
 tl (x:xs) = xs
 
+first :: (a, b) -> a
+first (a, _) = a
+
+isZero :: Int -> Bool
+isZero 0 = True
+isZero _ = False
+
+isLeapYear :: Int -> Bool
+isLeapYear x = if x `mod` 4 /= 0 then False else
+                    if x `mod` 100 /= 0 then True else
+                        if x `mod` 400 == 0 then True else False
+
+-- using if else 
+safetail :: [a] -> [a]
+safetail xs = if null xs then [] else tail xs
+
+-- using guards
+safetail2 :: [a] -> [a]
+safetail2 xs | null xs = []
+             | otherwise = tail xs
+    
+-- using pattern matching
+safetail3 :: [a] -> [a]
+safetail3 [] = []
+safetail3 (x:xs) = xs
+
+
+
 

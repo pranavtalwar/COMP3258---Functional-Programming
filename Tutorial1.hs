@@ -98,6 +98,7 @@ safetail3 :: [a] -> [a]
 safetail3 [] = []
 safetail3 (x:xs) = xs
 
-
+add :: Int -> Int -> Int 
+add = \x -> (\y -> x + y)
 
 

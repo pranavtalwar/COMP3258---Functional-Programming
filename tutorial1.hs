@@ -77,6 +77,10 @@ safetail'' :: [a] -> [a]
 safetail'' xs | null xs = []
               | otherwise = tail xs
 
+-- lambda example
+add :: Int -> Int -> Int 
+add = \x -> (\y -> x + y)
+
 
 
 

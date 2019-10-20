@@ -1,4 +1,4 @@
-import Prelude hiding (concat, replicate, (!!), elem, zipWith, length, filter, unzip, reverse)
+import Prelude hiding (concat, replicate, (!!), elem, zipWith, length, filter,unzip, reverse)
 
 -- q1 concatenate a list
 concat :: [[a]] -> [a]
@@ -78,14 +78,14 @@ zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
 zipWith f xs ys = map (\(x,y) -> f x y) (zip xs ys)
 
 -- q11
-length :: [a] -> Int
-length = foldr (const (+1)) 0
+length :: [a] -> Int 
+length = foldr (\x xs -> 1 + xs) 0
 
 filter :: (a-> Bool) -> [a] -> [a]
-filter p = foldr (\x xs-> if p x then x : xs else xs) []
+filter p = foldr (\x xs -> if p x then x : xs else xs) []
 
-unzip ::[(a,b)] -> ([a], [b])
-unzip = foldr (\(x,y) (xs, ys) -> (x:xs, y:ys)) ([], [])
+unzip :: [(a,b)] -> ([a], [b])
+unzip = foldr (\(x,y) (xs,ys) -> (x:xs, y:ys)) ([], [])
 
 reverse :: [a] -> [a]
 reverse = foldl (flip(:)) []

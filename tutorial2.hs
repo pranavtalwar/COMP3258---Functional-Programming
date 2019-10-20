@@ -1,4 +1,4 @@
-import Prelude hiding (concat, replicate, (!!), elem)
+import Prelude hiding (concat, replicate, (!!), elem, zipWith, length, filter, unzip, reverse)
 
 -- q1 concatenate a list
 concat :: [[a]] -> [a]
@@ -68,3 +68,26 @@ pythagoreans n = [(x,y,z) | x <- [1..n], y <-[1..n], z <- [1..n], x^2 + y^2 == z
 perfect :: Int -> [Int]
 perfect n = [x | x <- [1..n], isPerfect x]
     where isPerfect y = sum([z | z <- [1..(y-1)], y `mod` z == 0]) == y
+
+-- q9
+filtMap :: (a -> b) -> (a -> Bool) -> [a] -> [b]
+filtMap m f = map m . filter f
+
+-- q10
+zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith f xs ys = map (\(x,y) -> f x y) (zip xs ys)
+
+-- q11
+length :: [a] -> Int
+length = foldr (const (+1)) 0
+
+filter :: (a-> Bool) -> [a] -> [a]
+filter p = foldr (\x xs-> if p x then x : xs else xs) []
+
+unzip ::[(a,b)] -> ([a], [b])
+unzip = foldr (\(x,y) (xs, ys) -> (x:xs, y:ys)) ([], [])
+
+reverse :: [a] -> [a]
+reverse = foldl (flip(:)) []
+
+

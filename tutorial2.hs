@@ -61,7 +61,8 @@ msort xs = merge (msort left) (msort right)
         where (left, right) = splitAt ((length xs) `div` 2) xs
 
 -- q7
-pythongoreans n = [(x,y,z) | x <- [1..n], y <-[1..n], z <- [1..n], x^2 + y^2 == z^2]
+pythagoreans :: Int -> [(Int, Int, Int)]
+pythagoreans n = [(x,y,z) | x <- [1..n], y <-[1..n], z <- [1..n], x^2 + y^2 == z^2]
 
 -- q8
 perfect :: Int -> [Int]

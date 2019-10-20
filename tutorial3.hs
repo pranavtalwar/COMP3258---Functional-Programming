@@ -15,7 +15,3 @@ treeMap _ Leaf = Leaf
 treeMap f (Node l n r) = Node (nl) (f n) (nr)
     where nl = treeMap f l
           nr = treeMap f r
-
--- q6
--- foldTree :: (a -> b -> b) -> b -> Tree a -> b
--- foldTree f v 

@@ -1,4 +1,4 @@
-import Prelude hiding (product, length, reverse, zip, drop, (++), and, concat, replicate, (!!), elem)
+import Prelude hiding (product, length, reverse, zip, drop, (++), and, concat, replicate, (!!), elem, unzip)
 
 factorial :: Int -> Int 
 factorial 0 = 1
@@ -40,3 +40,8 @@ qsort (x:xs) = smaller ++ [x] ++ larger
 and :: [Bool] -> Bool
 and [] = True
 and (x:xs) = x && and (xs)
+
+unzip :: [(a,b)] -> ([a], [b])
+unzip [] = ([], [])
+unzip ((x, y):xs) = (x: ft, y: snd)
+    where (ft, snd) = unzip xs

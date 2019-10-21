@@ -7,9 +7,9 @@ concat (xs:xss) = xs ++ concat(xss)
 
 -- replicate an element n times
 replicate :: Int -> a -> [a]
+replicate 0 _ = []
 replicate n x
     | n < 0 = error "must be positive"
-    | n == 0 = []
     | otherwise = x : replicate (n-1) x
 
 -- access the nth element of the list

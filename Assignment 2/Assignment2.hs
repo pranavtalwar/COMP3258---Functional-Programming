@@ -85,10 +85,54 @@ spaces = many $ oneOf " \n\r\t"
 ------------------------------------------------------------
 ------------------------------------------------------------
 
+boxParser :: Parser Box
+boxParser = do
+    string "<box"
+    spaces
+    string "length="
+    length <- natural
+    spaces
+    string "width="
+    width <- natural
+    spaces
+    string "height="
+    height <- natural
+    spaces
+    string ">"
+    spaces
+    boxList <- boxlistParser
+    spaces
+    string "</box>" 
+    return (Box length width height boxList)
+
+boxlistParser :: Parser [Box]
+boxlistParser = option boxes space
+    where
+        boxes = do
+            box <- boxParser
+            spaces
+            boxlist <- boxlistParser
+            return (box:boxlist)
+        space = do
+            string ""
+            return []
 
 parse :: String -> Box
+parse xs = fst (head (runParse boxParser xs))
 
-  
-  
--- isValid :: String -> Bool
--- -- TODO
+isValid :: String -> Bool
+isValid xs = if (runParse boxParser xs) == [] then False else (lengthChecker box) && (widthChecker box) 
+            where box = parse xs
+
+lengthChecker :: Box -> Bool
+lengthChecker (Box l w h [])= True
+lengthChecker (Box l w h xs) = (l > sum[il | (Box il iw ih ixs) <- xs]) && (and [lengthChecker ib | ib <- xs])
+
+widthChecker :: Box -> Bool
+widthChecker (Box l w h []) = True
+widthChecker (Box l w h xs) = (w > maximum [iw | (Box il iw ih ixs) <- xs]) && (and [widthChecker ib | ib <- xs])
+
+heightChecker :: Box -> Bool
+heightChecker (Box l w h []) = True 
+heightChecker (Box l w h xs) = (h > maximum [ih | (Box il iw ih ixs) <- xs]) && (and [heightChecker ib | ib <- xs])
+
